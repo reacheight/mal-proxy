@@ -1,8 +1,10 @@
 from flask import Flask
+from flask_cors import CORS
 
 import mal_client
 
 app = Flask(__name__)
+CORS(app, origins=['https://twitch.tv'])
 
 
 @app.route('/<profile>/anime/top')
