@@ -13,13 +13,14 @@ def get_top_rated_anime(profile, limit=config.DEFAULT_ANIME_LIMIT):
 
     anime_data = response.json()['data']
     anime_list = [
-        build_user_anime(data['node']['title'], data['node']['main_picture']['medium'], data['list_status']['score'])
+        build_user_anime(data['node']['id'], data['node']['title'], data['node']['main_picture']['medium'], data['list_status']['score'])
         for data in anime_data]
     return anime_list
 
 
-def build_user_anime(title, picture, score):
+def build_user_anime(anime_id, title, picture, score):
     return {
+        'id': anime_id,
         'title': title,
         'picture': picture,
         'score': score
