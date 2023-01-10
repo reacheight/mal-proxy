@@ -10,12 +10,12 @@ def top_rated_anime(profile, limit=config.DEFAULT_ANIME_LIMIT):
 
 
 def recently_finished_anime(profile, limit=config.DEFAULT_ANIME_LIMIT):
-    url = build_url(profile, 'completed', 'anime_start_date', limit)
+    url = build_url(profile, 'completed', 'list_updated_at', limit)
     return make_request(url)
 
 
 def watching_anime(profile, limit=config.DEFAULT_ANIME_LIMIT):
-    url = build_url(profile, 'watching', 'anime_start_date', limit)
+    url = build_url(profile, 'watching', 'list_updated_at', limit)
     return make_request(url)
 
 
