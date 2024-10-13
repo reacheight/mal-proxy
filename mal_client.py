@@ -28,24 +28,26 @@ def make_request(url):
 
 
 def build_url(profile, status, sort, limit):
-    return f'{config.MAL_HOST}/v2/users/{profile}/animelist?status={status}&sort={sort}&limit={limit}&fields=list_status'
+    return f'{config.MAL_HOST}/v2/users/{profile}/animelist?status={status}&sort={sort}&limit={limit}&fields=list_status,start_date,genres'
 
 
 def map_response_to_anime_list(json):
     data = json['data']
     anime_list = [
-        build_user_anime(entry['node']['id'], entry['node']['title'], entry['node']['main_picture']['medium'],
+        build_user_anime(entry['node']['id'], entry['node']['title'], entry['node']['main_picture']['medium'], entry['node']['start_date'], entry['node']['genres'],
                          entry['list_status']['score'], entry['list_status']['num_episodes_watched'])
         for entry in data]
 
     return anime_list
 
 
-def build_user_anime(anime_id, title, picture, score, episodes_watched):
+def build_user_anime(anime_id, title, picture, start_date, genres, score, episodes_watched):
     return {
         'id': anime_id,
         'title': title,
         'picture': picture,
+        'start_date': start_date,
+        'genres': genres,
         'score': score,
         'episodes_watched': episodes_watched
     }
